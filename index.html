@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abhinav Krishna | Portfolio</title>
 <!-- SUPABASE CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{
   margin:0;
@@ -107,6 +107,14 @@ nav ul li a:hover{color:#00ffd5;}
   color:#000;
   text-decoration:none;
   border-radius:30px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#00e6c3;
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,255,213,0.4);
 }
 
 /* Sections */
@@ -118,6 +126,7 @@ section{
 section h2{
   margin-bottom:30px;
   color:#00ffd5;
+  font-size:2rem;
 }
 
 /* About */
@@ -137,6 +146,7 @@ section h2{
 .skill span{
   display:flex;
   justify-content:space-between;
+  margin-bottom:5px;
 }
 
 .bar{
@@ -151,7 +161,7 @@ section h2{
   height:100%;
   width:0;
   background:#00ffd5;
-  transition:2s;
+  transition:width 2s ease;
 }
 
 /* Cards */
@@ -159,6 +169,7 @@ section h2{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
+  gap:20px;
 }
 
 .card{
@@ -174,6 +185,7 @@ section h2{
   transform:translateY(-10px);
   box-shadow:0 10px 20px rgba(0,255,213,0.3);
 }
+
 .card img{
   width:100%;
   height:160px;
@@ -187,56 +199,95 @@ section h2{
   transform:scale(1.05);
 }
 
+.card h3{
+  margin-bottom:10px;
+  color:#00ffd5;
+}
 
 /* Journey */
 .timeline{
   list-style:none;
   max-width:500px;
   margin:auto;
+  text-align:left;
 }
 
 .timeline li{
   margin:15px 0;
   padding-left:20px;
   border-left:2px solid #00ffd5;
+  padding-bottom:10px;
 }
 
-/* Contact */
-form{
-  max-width:400px;
+/* Feedback Section */
+#feedback{
+  background:#111;
+}
+
+.feedback-form{
+  max-width:500px;
   margin:auto;
 }
 
-form input, form textarea{
+.feedback-form input, 
+.feedback-form textarea{
   width:100%;
-  padding:10px;
+  padding:12px;
   margin:10px 0;
   background:#222;
-  border:none;
+  border:1px solid #333;
+  border-radius:8px;
   color:white;
+  font-size:14px;
+  transition:0.3s;
 }
 
-form button{
+.feedback-form input:focus, 
+.feedback-form textarea:focus{
+  outline:none;
+  border-color:#00ffd5;
+  box-shadow:0 0 10px rgba(0,255,213,0.2);
+}
+
+.feedback-form button{
   width:100%;
-  padding:10px;
+  padding:12px;
   background:#00ffd5;
   border:none;
+  border-radius:8px;
   cursor:pointer;
+  font-weight:600;
+  color:#000;
+  font-size:16px;
+  transition:0.3s;
+}
+
+.feedback-form button:hover{
+  background:#00e6c3;
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,255,213,0.4);
+}
+
+#status{
+  margin-top:15px;
+  font-size:14px;
+  font-weight:600;
 }
 
 /* Footer */
 footer{
-  padding:15px;
+  padding:20px;
   background:#000;
   text-align:center;
   font-size:14px;
+  color:#666;
 }
 
 /* Animations */
 .fade{
   opacity:0;
   transform:translateY(30px);
-  transition:1s;
+  transition:opacity 1s ease, transform 1s ease;
 }
 
 .show{
@@ -256,18 +307,17 @@ footer{
     <li><a href="#cert">Certifications</a></li>
     <li><a href="#journey">Journey</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#feedback">Feedback</a></li>
   </ul>
 </nav>
 
 <div class="hero fade">
   <canvas id="hero-canvas"></canvas>
-
   <div class="hero-content">
     <img src="abhinav.jpeg" alt="Abhinav Krishna" class="hero-photo">
     <h1>Hi, I'm <span>Abhinav Krishna</span></h1>
     <p>Aspiring Cloud Engineer | Cloud And DevOps Enthusiast</p>
-    <a href="#contact" class="btn">Get In Touch</a>
+    <a href="#feedback" class="btn">Get In Touch</a>
   </div>
 </div>
 
@@ -285,22 +335,22 @@ footer{
 
   <div class="skill">
     <span>C<b>40%</b></span>
-    <div class="bar"><div class="progress C"></div></div>
+    <div class="bar"><div class="progress c-progress"></div></div>
   </div>
 
   <div class="skill">
     <span>CSS <b>85%</b></span>
-    <div class="bar"><div class="progress css"></div></div>
+    <div class="bar"><div class="progress css-progress"></div></div>
   </div>
 
   <div class="skill">
     <span>JavaScript <b>75%</b></span>
-    <div class="bar"><div class="progress js"></div></div>
+    <div class="bar"><div class="progress js-progress"></div></div>
   </div>
 
   <div class="skill">
     <span>Python <b>70%</b></span>
-    <div class="bar"><div class="progress python"></div></div>
+    <div class="bar"><div class="progress python-progress"></div></div>
   </div>
 </section>
 
@@ -338,6 +388,7 @@ footer{
 
   </div>
 </section>
+
 <section id="journey" class="fade">
   <h2>My Journey</h2>
   <ul class="timeline">
@@ -353,68 +404,25 @@ footer{
   <div class="cards">
     <div class="card">
       <h3>Portfolio Website</h3>
-      <p>Responsive personal portfolio.</p>
+      <p>Responsive personal portfolio with 3D animations.</p>
     </div>
     <div class="card">
       <h3>File Organizer</h3>
-      <p>Python-Based File Organizer</p>
+      <p>Python-based automated file organizer.</p>
     </div>
   </div>
 </section>
 
-<!-- FEEDBACK -->
-<section id="feedback">
-<div class="container card">
-<h2 class="section-title">Feedback</h2>
-
-<form class="feedback-form" id="feedbackForm">
-<input type="text" id="name" placeholder="Your Name" required>
-<input type="email" id="email" placeholder="Your Email" required>
-<textarea rows="4" id="message" placeholder="Your Feedback" required></textarea>
-<button type="submit">Submit Feedback</button>
-</form>
-
-<div class="feedback-status" id="status"></div>
-</div>
+<section id="feedback" class="fade">
+  <h2>Feedback</h2>
+  <form class="feedback-form" id="feedbackForm">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea rows="5" id="message" placeholder="Your Feedback" required></textarea>
+    <button type="submit">Submit Feedback</button>
+  </form>
+  <div id="status"></div>
 </section>
-
-<footer style="text-align:center;padding:20px;color:var(--muted)">
-</footer>
-
-<script>
-/* 🔗 SUPABASE CONFIG */
-const supabaseUrl = "https://cymbgtvahvkaktrcjbrx.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5bWJndHZhaHZrYWt0cmNqYnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwNjg3MTcsImV4cCI6MjA4NjY0NDcxN30.AzlHEJDRf93YoAtgJ4kWxgaKJtcmPTEM-wLm0Stirrk";
-
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-/* 📨 FEEDBACK SUBMIT */
-document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
-e.preventDefault();
-
-const status = document.getElementById("status");
-status.innerText = "Submitting...";
-
-const name = document.getElementById("name").value;
-const email = document.getElementById("email").value;
-const message = document.getElementById("message").value;
-
-const { error } = await supabaseClient
-.from("feedbacks")
-.insert([{ name, email, message }]);
-
-if (error) {
-status.innerText = "❌ Error submitting feedback";
-status.style.color = "red";
-} else {
-status.innerText = "✅ Feedback submitted successfully!";
-status.style.color = "#00d4ff";
-e.target.reset();
-}});
-</script>
-
-</body>
-</html>
 
 <footer>
   © 2026 Abhinav Krishna | All Rights Reserved
@@ -423,85 +431,161 @@ e.target.reset();
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <script>
-/* Skill animation */
-window.addEventListener("scroll",()=>{
-  const skills=document.querySelector("#skills");
-  if(skills.getBoundingClientRect().top < window.innerHeight){
-    document.querySelector(".C").style.width="40%";
-    document.querySelector(".css").style.width="85%";
-    document.querySelector(".js").style.width="75%";
-    document.querySelector(".python").style.width="70%";
+/* ========================================
+   SUPABASE CONFIGURATION & FEEDBACK
+======================================== */
+const supabaseUrl = "https://cymbgtvahvkaktrcjbrx.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5bWJndHZhaHZrYWt0cmNqYnJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwNjg3MTcsImV4cCI6MjA4NjY0NDcxN30.AzlHEJDRf93YoAtgJ4kWxgaKJtcmPTEM-wLm0Stirrk";
+
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+// Feedback Form Handler
+document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const status = document.getElementById("status");
+  const submitButton = e.target.querySelector('button[type="submit"]');
+  
+  // Show loading state
+  status.innerText = "Submitting...";
+  status.style.color = "#fff";
+  submitButton.disabled = true;
+  submitButton.innerText = "Submitting...";
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  console.log("Attempting to submit feedback:", { name, email, message });
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("feedbacks")
+      .insert([{ 
+        name: name, 
+        email: email, 
+        message: message 
+      }])
+      .select();
+
+    if (error) {
+      console.error("Supabase error:", error);
+      status.innerText = `❌ Error: ${error.message}`;
+      status.style.color = "#ff4444";
+    } else {
+      console.log("Feedback submitted successfully:", data);
+      status.innerText = "✅ Feedback submitted successfully!";
+      status.style.color = "#00ffd5";
+      e.target.reset();
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        status.innerText = "";
+      }, 5000);
+    }
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    status.innerText = "❌ An unexpected error occurred. Please try again.";
+    status.style.color = "#ff4444";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerText = "Submit Feedback";
   }
 });
 
-/* Fade animation */
-document.querySelectorAll(".fade").forEach(el=>{
-  window.addEventListener("scroll",()=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-100){
-      el.classList.add("show");
+/* ========================================
+   SCROLL ANIMATIONS
+======================================== */
+
+// Skill bar animation
+let skillsAnimated = false;
+window.addEventListener("scroll", () => {
+  const skills = document.querySelector("#skills");
+  if (!skillsAnimated && skills.getBoundingClientRect().top < window.innerHeight) {
+    document.querySelector(".c-progress").style.width = "40%";
+    document.querySelector(".css-progress").style.width = "85%";
+    document.querySelector(".js-progress").style.width = "75%";
+    document.querySelector(".python-progress").style.width = "70%";
+    skillsAnimated = true;
+  }
+});
+
+// Fade-in animation for sections
+const fadeElements = document.querySelectorAll(".fade");
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -100px 0px"
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
     }
   });
-});
+}, observerOptions);
 
-/* Ultra-slow 3D particles */
-const canvas=document.getElementById("hero-canvas");
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+fadeElements.forEach(el => observer.observe(el));
 
-const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
+/* ========================================
+   THREE.JS PARTICLE ANIMATION
+======================================== */
+const canvas = document.getElementById("hero-canvas");
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-camera.position.z=60;
+camera.position.z = 60;
 
-const geometry=new THREE.BufferGeometry();
-const count=1200;
-const positions=new Float32Array(count*3);
+// Create particles
+const geometry = new THREE.BufferGeometry();
+const count = 1200;
+const positions = new Float32Array(count * 3);
 
-for(let i=0;i<count*3;i++){
-  positions[i]=(Math.random()-0.5)*200;
+for (let i = 0; i < count * 3; i++) {
+  positions[i] = (Math.random() - 0.5) * 200;
 }
 
-geometry.setAttribute("position",new THREE.BufferAttribute(positions,3));
+geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-const material=new THREE.PointsMaterial({
-  color:0x00ffd5,
-  size:1.2,
-  transparent:true,
-  opacity:0.8
+const material = new THREE.PointsMaterial({
+  color: 0x00ffd5,
+  size: 1.2,
+  transparent: true,
+  opacity: 0.8
 });
 
-const particles=new THREE.Points(geometry,material);
+const particles = new THREE.Points(geometry, material);
 scene.add(particles);
 
-let mouseX=0, mouseY=0;
+// Mouse interaction
+let mouseX = 0, mouseY = 0;
 
-window.addEventListener("mousemove",e=>{
-  mouseX=(e.clientX-window.innerWidth/2)*0.00005;
-  mouseY=(e.clientY-window.innerHeight/2)*0.00005;
+window.addEventListener("mousemove", (e) => {
+  mouseX = (e.clientX - window.innerWidth / 2) * 0.00005;
+  mouseY = (e.clientY - window.innerHeight / 2) * 0.00005;
 });
 
-function animate(){
+// Animation loop
+function animate() {
   requestAnimationFrame(animate);
 
-  particles.rotation.y+=0.00002 + mouseX;
-  particles.rotation.x+=0.00001 + mouseY;
+  particles.rotation.y += 0.00002 + mouseX;
+  particles.rotation.x += 0.00001 + mouseY;
 
-  renderer.render(scene,camera);
+  renderer.render(scene, camera);
 }
 animate();
 
-window.addEventListener("resize",()=>{
-  camera.aspect=window.innerWidth/window.innerHeight;
+// Handle window resize
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth,window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
