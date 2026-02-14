@@ -460,7 +460,7 @@ document.getElementById("feedbackForm").addEventListener("submit", async (e) => 
 
   try {
     const { data, error } = await supabaseClient
-      .from("feedback")
+      .from("feedbacks")
       .insert([{ 
         name: name, 
         email: email, 
@@ -589,4 +589,5 @@ window.addEventListener("resize", () => {
 
 </body>
 </html>
+
 
